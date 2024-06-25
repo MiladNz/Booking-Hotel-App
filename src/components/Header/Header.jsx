@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { DateRange, DateRangePicker } from "react-date-range";
+import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import {
   createSearchParams,
@@ -13,7 +13,10 @@ import {
 } from "react-router-dom";
 
 function Header() {
-  const [destination, setDestination] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [destination, setDestination] = useState(
+    searchParams.get("destination") || ""
+  );
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
@@ -25,8 +28,6 @@ function Header() {
   ]);
   const [openDate, setOpenDate] = useState(false);
   const navigate = useNavigate();
-
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleOptions = (name, operation) => {
     setOptions((prev) => {
@@ -43,8 +44,11 @@ function Header() {
       destination,
       options: JSON.stringify(options),
     });
-    // setSearchParams(encodedParams);
-    navigate({ pathname: "/hotels", search: encodedParams.toString() });
+    //setSearchParams(encodedParams);
+    navigate({
+      pathname: "/hotels",
+      search: encodedParams.toString(),
+    });
   };
 
   return (
