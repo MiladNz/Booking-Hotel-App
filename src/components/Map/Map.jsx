@@ -46,7 +46,6 @@ function Map() {
           </Marker>
         ))}
       </MapContainer>
-      , )
     </div>
   );
 }
