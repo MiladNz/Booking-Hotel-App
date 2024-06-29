@@ -3,9 +3,11 @@ import useFetch from "../../hooks/useFetch";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+
 const BASE_URL = "http://localhost:5000";
-const HotelContext = createContext();
-function HotelsProvider({ children }) {
+const BookmarkContext = createContext();
+
+function BookmarkListProvider({ children }) {
   const [currentBookmark, setCurrentBookmark] = useState(null);
   const [isLoadingCurrentBookmark, setIsLoadingCurrentBookmark] =
     useState(false);
@@ -13,14 +15,14 @@ function HotelsProvider({ children }) {
   const { isLoading, data: bookmarks } = useFetch(`${BASE_URL}/bookmarks`);
 
   async function getBookmark(id) {
-    setIsLoadingCurrentHotel(true);
+    setIsLoadingCurrentBookmark(true);
     try {
       const { data } = await axios.get(`${BASE_URL}/bookmarks/${id}`);
-      setIsLoadingCurrentBookmark(data);
-      setIsLoadingCurrentBsetIsLoadingCurrentBookmark(false);
+      setCurrentBookmark(data);
+      setIsLoadingCurrentBookmark(false);
     } catch (error) {
       toast.error(error.message);
-      setIsLoadingCurrentBsetIsLoadingCurrentBookmark(false);
+      setIsLoadingCurrentBookmark(false);
     }
   }
 
@@ -38,8 +40,8 @@ function HotelsProvider({ children }) {
   );
 }
 
-export default HotelsProvider;
+export default BookmarkListProvider;
 
 export function useBookmark() {
-  return useContext(HotelContext);
+  return useContext(BookmarkContext);
 }
