@@ -1,11 +1,11 @@
 import { createContext, useContext, useState } from "react";
 import useFetch from "../../hooks/useFetch";
-import { useSearchParams } from "react-router-dom";
+// import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const BASE_URL = "http://localhost:5000";
 const BookmarkContext = createContext();
+const BASE_URL = "http://localhost:5000";
 
 function BookmarkListProvider({ children }) {
   const [currentBookmark, setCurrentBookmark] = useState(null);
