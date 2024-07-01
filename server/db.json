@@ -1352,58 +1352,22 @@
   },
   "bookmarks": [
     {
-      "cityName": "Abalessa",
-      "country": "Algeria",
-      "countryCode": "DZ",
-      "latitude": "23.18455079512732",
-      "longitude": "3.795523257510883",
-      "host_location": "Abalessa Algeria",
+      "cityName": "Kortemark",
+      "country": "Belgium",
+      "countryCode": "BE",
+      "latitude": "51.0100930453789",
+      "longitude": "3.010518485959382",
+      "host_location": "Kortemark Belgium",
       "id": 1
     },
     {
-      "cityName": "Mahidasht",
-      "country": "Iran (Islamic Republic of)",
-      "countryCode": "IR",
-      "latitude": "34.32869425037187",
-      "longitude": "46.724183117022086",
-      "host_location": "Mahidasht Iran (Islamic Republic of)",
-      "id": 4
-    },
-    {
-      "cityName": "Sanandaj",
-      "country": "Iran (Islamic Republic of)",
-      "countryCode": "IR",
-      "latitude": "35.31372444726279",
-      "longitude": "47.03114358752335",
-      "host_location": "Sanandaj Iran (Islamic Republic of)",
-      "id": 5
-    },
-    {
-      "cityName": "A Dakhla Oasis",
-      "country": "Egypt",
-      "countryCode": "EG",
-      "latitude": "25.02090651422749",
-      "longitude": "29.09059588509316",
-      "host_location": "A Dakhla Oasis Egypt",
-      "id": 7
-    },
-    {
-      "cityName": "Baba Kot",
-      "country": "Pakistan",
-      "countryCode": "PK",
-      "latitude": "28.43528783183169",
-      "longitude": "67.78003711374224",
-      "host_location": "Baba Kot Pakistan",
-      "id": 8
-    },
-    {
-      "cityName": "Strasbourg",
+      "cityName": "Noisy-sur-Ecole",
       "country": "France",
       "countryCode": "FR",
-      "latitude": "48.596850513966686",
-      "longitude": "7.804202888303445",
-      "host_location": "Strasbourg France",
-      "id": 9
+      "latitude": "48.37796934698127",
+      "longitude": "2.542109613209696",
+      "host_location": "Noisy-sur-Ecole France",
+      "id": 2
     }
   ]
 }
