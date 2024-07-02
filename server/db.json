@@ -1386,6 +1386,33 @@
       "longitude": "51.38561375313383",
       "host_location": "Tehran Iran (Islamic Republic of)",
       "id": 4
+    },
+    {
+      "cityName": "Giza",
+      "country": "Egypt",
+      "countryCode": "EG",
+      "latitude": "30.07118363675105",
+      "longitude": "30.673993152729125",
+      "host_location": "Giza Egypt",
+      "id": 5
+    },
+    {
+      "cityName": "Madinat as Sadat",
+      "country": "Egypt",
+      "countryCode": "EG",
+      "latitude": "30.321943252535988",
+      "longitude": "30.465716802101703",
+      "host_location": "Madinat as Sadat Egypt",
+      "id": 6
+    },
+    {
+      "cityName": "Gistel",
+      "country": "Belgium",
+      "countryCode": "BE",
+      "latitude": "51.15869638257343",
+      "longitude": "2.9386295393159805",
+      "host_location": "Gistel Belgium",
+      "id": 7
     }
   ]
 }

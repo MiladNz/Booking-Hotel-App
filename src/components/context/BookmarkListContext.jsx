@@ -34,8 +34,25 @@ function bookmarkReducer(state, action) {
         bookmarks: action.payload,
       };
     case "bookmark/loaded":
+      return {
+        ...state,
+        isLoading: false,
+        currentBookmark: action.payload,
+      };
     case "bookmark/created":
+      return {
+        ...state,
+        isLoading: false,
+        bookmarks: [...state.bookmarks, action.payload],
+        currentBookmark: action.payload,
+      };
     case "bookmark/deleted":
+      return {
+        ...state,
+        isLoading: false,
+        bookmarks: state.bookmarks.filter((item) => item.id !== action.payload),
+        currentBookmark: null,
+      };
     case "rejected":
       return { ...state, isLoading: false, error: action.payload };
     default:
@@ -80,42 +97,52 @@ function BookmarkListProvider({ children }) {
 
   async function getBookmark(id) {
     // setIsLoading(true);
-    dispatch({ type: "loading" });
     // setCurrentBookmark(null);
+    if (Number(id) === currentBookmark?.id) return;
+    dispatch({ type: "loading" });
     try {
       const { data } = await axios.get(`${BASE_URL}/bookmarks/${id}`);
-      setCurrentBookmark(data);
+      dispatch({ type: "bookmark/loaded", payload: data });
     } catch (error) {
       toast.error(error.message);
-    } finally {
-      setIsLoading(false);
+      dispatch({
+        type: "rejected",
+        payload: "an error occurred in fetching single bookmark !",
+      });
     }
   }
 
   async function createBookmark(newBookmark) {
-    setIsLoading(true);
+    // setIsLoading(true);
+    dispatch({ type: "loading" });
     try {
       const { data } = await axios.post(`${BASE_URL}/bookmarks/`, newBookmark);
-      setBookmarks(data);
-      setBookmarks((prev) => {
-        [...prev, data];
-      });
+      dispatch({ type: "bookmark/created", payload: data });
+      // setBookmarks(data);
+      // setBookmarks((prev) => {
+      //   [...prev, data];
+      // });
     } catch (error) {
       toast.error(error.message);
-    } finally {
-      setIsLoading(false);
+      dispatch({
+        type: "rejected",
+        payload: error.message,
+      });
     }
   }
 
   async function deleteBookmark(id) {
-    setIsLoading(true);
+    dispatch({ type: "loading" });
     try {
       await axios.delete(`${BASE_URL}/bookmarks/${id}`);
-      setBookmarks((prev) => prev.filter((item) => item.id !== id));
+      // setBookmarks((prev) => prev.filter((item) => item.id !== id));
+      dispatch({ type: "bookmark/deleted", payload: id });
     } catch (error) {
       toast.error(error.message);
-    } finally {
-      setIsLoading(false);
+      dispatch({
+        type: "rejected",
+        payload: error.message,
+      });
     }
   }
 
