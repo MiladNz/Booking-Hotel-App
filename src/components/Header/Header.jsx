@@ -1,4 +1,4 @@
-import { MdLocationOn } from "react-icons/md";
+import { MdLocationOn, MdLogout } from "react-icons/md";
 import { HiCalendar, HiMinus, HiPlus, HiSearch } from "react-icons/hi";
 import { useRef, useState } from "react";
 import useOutsideClick from "../../hooks/useOutsideClick";
@@ -7,10 +7,12 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import {
+  NavLink,
   createSearchParams,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
 
 function Header() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,7 +26,11 @@ function Header() {
     room: 1,
   });
   const [date, setDate] = useState([
-    { startDate: new Date(), endDate: new Date(), key: "selection" },
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
   ]);
   const [openDate, setOpenDate] = useState(false);
   const navigate = useNavigate();
@@ -38,13 +44,12 @@ function Header() {
     });
   };
   const handleSearch = () => {
-    // setSearchParams({ date, options, destination });
     const encodedParams = createSearchParams({
       date: JSON.stringify(date),
       destination,
       options: JSON.stringify(options),
     });
-    //setSearchParams(encodedParams);
+    //note : =>  setSearchParams(encodedParams);
     navigate({
       pathname: "/hotels",
       search: encodedParams.toString(),
@@ -53,6 +58,7 @@ function Header() {
 
   return (
     <div className="header">
+      <NavLink to="/bookmark">Bookmarks</NavLink>
       <div className="headerSearch">
         <div className="headerSearchItem">
           <MdLocationOn className="headerIcon locationIcon" />
@@ -73,7 +79,7 @@ function Header() {
             {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
               date[0].endDate,
               "MM/dd/yyyy"
-            )} `}
+            )}`}
           </div>
           {openDate && (
             <DateRange
@@ -88,7 +94,8 @@ function Header() {
         </div>
         <div className="headerSearchItem">
           <div id="optionDropDown" onClick={() => setOpenOptions(!openOptions)}>
-            {options.adult} adult &bull; {options.children} children &bull;{" "}
+            {options.adult} adult &nbsp;&bull;&nbsp; {options.children} children
+            &nbsp;&bull;&nbsp;
             {options.room} room
           </div>
           {openOptions && (
@@ -106,10 +113,10 @@ function Header() {
           </button>
         </div>
       </div>
+      <User />
     </div>
   );
 }
-
 export default Header;
 
 function GuestOptionList({ options, handleOptions, setOpenOptions }) {
@@ -150,13 +157,36 @@ function OptionItem({ options, type, minLimit, handleOptions }) {
           disabled={options[type] <= minLimit}>
           <HiMinus className="icon" />
         </button>
-        <span className="optionText">{options[type]}</span>
+        <span className="optionCounterNumber">{options[type]}</span>
         <button
           onClick={() => handleOptions(type, "inc")}
           className="optionCounterBtn">
           <HiPlus className="icon" />
         </button>
       </div>
+    </div>
+  );
+}
+
+function User() {
+  const navigate = useNavigate();
+  const { user, isAuthenticated, logout } = useAuth();
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+  return (
+    <div>
+      {isAuthenticated ? (
+        <div>
+          <strong>{user.name}</strong>
+          <button>
+            &nbsp; <MdLogout onClick={handleLogout} className="logout icon" />
+          </button>
+        </div>
+      ) : (
+        <NavLink to="/login">login</NavLink>
+      )}
     </div>
   );
 }

@@ -1404,15 +1404,6 @@
       "longitude": "30.465716802101703",
       "host_location": "Madinat as Sadat Egypt",
       "id": 6
-    },
-    {
-      "cityName": "Gistel",
-      "country": "Belgium",
-      "countryCode": "BE",
-      "latitude": "51.15869638257343",
-      "longitude": "2.9386295393159805",
-      "host_location": "Gistel Belgium",
-      "id": 7
     }
   ]
 }
